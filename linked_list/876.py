@@ -1,6 +1,4 @@
 # Definition for singly-linked list.
-from typing import Optional
-import math
 
 
 class ListNode:
@@ -10,20 +8,9 @@ class ListNode:
 
 
 class Solution:
-    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        counter = 0
-        head_start = head
-
-        while head is not None:
-            counter += 1
-            head = head.next
-
-        center = counter // 2
-        head = head_start
-        counter = 0
-
-        while head is not None:
-            if counter == center:
-                return head
-            head = head.next
-            counter += 1
+    def middleNode(self, head):
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
