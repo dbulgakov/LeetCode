@@ -11,6 +11,8 @@ class Solution:
                 nums[i], nums[pos] = nums[pos], nums[i]
                 pos += 1
                 counter += 1
+            else:
+                nums[i] = '_'
 
         return counter
 
