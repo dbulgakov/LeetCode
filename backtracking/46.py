@@ -3,7 +3,7 @@ class Solution:
         res = []
         n = len(nums)
 
-        def backtrack(first=0):
+        def backtrack(first: int = 0):
             if first == n:
                 res.append(nums.copy())
 
