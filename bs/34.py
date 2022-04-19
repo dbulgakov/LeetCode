@@ -35,4 +35,4 @@ class Solution:
 
 
 s = Solution()
-print(s.searchRange([2], 1))
+print(s.searchRange([1], 1))
