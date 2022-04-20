@@ -18,7 +18,3 @@ class Solution:
                 return nums[middle]
             else:
                 right = middle - 1
-
-
-s = Solution()
-print(s.findMin([4, 5, 6, 7]))
