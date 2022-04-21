@@ -18,3 +18,4 @@ class Solution:
                 return nums[middle]
             else:
                 right = middle - 1
+
