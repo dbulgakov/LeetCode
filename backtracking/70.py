@@ -1,5 +1,4 @@
 import functools
-from datetime import datetime
 
 
 class Solution:
@@ -15,10 +14,3 @@ class Solution:
             return backtracking(start + 1) + backtracking(start + 2)
 
         return backtracking(0) if n > 0 else 0
-
-
-s = Solution()
-
-print(datetime.now())
-print(s.climbStairs(38))
-print(datetime.now())
