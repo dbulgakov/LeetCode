@@ -1,24 +1,16 @@
-from typing import List
-
-
-class Solution:
-    def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
-        if len(nums) == 0 or k == 0:
+class Solution(object):
+    def numSubarrayProductLessThanK(self, nums, k):
+        if len(nums) == 0 or k <= 1:
             return 0
 
-        counter = 0
+        prod = 1
+        ans = left = 0
 
-        for i in range(0, len(nums)):
-            if nums[i] < k:
-                counter += 1
+        for right, val in enumerate(nums):
+            prod *= val
+            while prod >= k:
+                prod /= nums[left]
+                left += 1
+            ans += right - left + 1
 
-                product = nums[i]
-
-                for j in range(i + 1, len(nums)):
-                    product = product * nums[j]
-                    if product < k:
-                        counter += 1
-                    else:
-                        break
-
-        return counter
+        return ans
