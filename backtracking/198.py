@@ -2,10 +2,11 @@ import functools
 from typing import List
 
 
-class Solution:  # TODO dp solution
+# dp solution -> task 213
+class Solution:
     def rob(self, nums: List[int]) -> int:
         @functools.lru_cache(None)
-        def backtrack(start):
+        def backtrack(start: int):
             max_find = 0
 
             if start >= len(nums):
