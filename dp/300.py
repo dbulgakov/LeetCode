@@ -9,4 +9,8 @@ class Solution:
                 if nums[i] > nums[j]:
                     dp[i] = max(dp[i], dp[j] + 1)
 
-        return max(dp)
+        return dp
+
+
+s = Solution()
+print(s.lengthOfLIS([0, 1, 0, 3, 2, 3]))
