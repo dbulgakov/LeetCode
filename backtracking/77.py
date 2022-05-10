@@ -16,6 +16,3 @@ class Solution:
 
         backtrack(1, [])
         return res
-
-
-
