@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -7,18 +10,19 @@ class TreeNode:
 
 class Solution:
     def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
-        def dfs(s, t):
-            if not s and not t:
+        def is_same_tree(p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+            if not p and not q:
                 return True
-            if not s or not t:
+
+            if not p or not q or p.val != q.val:
                 return False
 
-            return s.val == t.val and dfs(s.left, t.left) and dfs(s.right, t.right)
+            return is_same_tree(p.left, q.left) and is_same_tree(p.right, q.right)
 
         if not s:
             return False
 
-        if s.val == t.val and dfs(s, t):
+        if s.val == t.val and is_same_tree(s, t):
             return True
 
         return self.isSubtree(s.left, t) or self.isSubtree(s.right, t)
