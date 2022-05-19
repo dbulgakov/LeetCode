@@ -14,3 +14,18 @@ class Solution:
             return inorder(r.left) + [r.val] + inorder(r.right) if r else []
 
         return inorder(root)[k - 1]
+
+
+class Solution2:
+    def kthSmallest(self, root, k):
+        stack = []
+
+        while True:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            k -= 1
+            if not k:
+                return root.val
+            root = root.right
