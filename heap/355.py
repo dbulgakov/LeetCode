@@ -1,3 +1,8 @@
+import heapq
+from collections import defaultdict
+from typing import List
+
+
 class Twitter:
 
     def __init__(self):
@@ -7,10 +12,11 @@ class Twitter:
 
     def postTweet(self, userId: int, tweetId: int) -> None:
         self.tweet_count += 1
+
         if len(self.user_feeds[userId]) == 10:
-            heapq.heappushpop(self.user_feeds[userId], (self.tweet_count, tweetId))
-        else:
-            heapq.heappush(self.user_feeds[userId], (self.tweet_count, tweetId))
+            self.user_feeds[userId].pop(0)
+
+        self.user_feeds[userId].append((self.tweet_count, tweetId))
 
     def getNewsFeed(self, userId: int) -> List[int]:
         feed = []
