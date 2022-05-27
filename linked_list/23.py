@@ -31,9 +31,14 @@ class Solution:
         if not lists:
             return None
 
-        result = lists[0]
+        while len(lists) > 1:
+            merged_lists = []
 
-        for i in range(1, len(lists)):
-            result = merge_two_lists(result, lists[i])
+            for i in range(0, len(lists), 2):
+                first_list = lists[i]
+                second_list = lists[i + 1] if i + 1 < len(lists) else None
+                merged_lists.append(merge_two_lists(first_list, second_list))
 
-        return result
+            lists = merged_lists
+
+        return lists[0]
