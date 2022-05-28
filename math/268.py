@@ -5,9 +5,6 @@ class Solution:
     def missingNumber(self, nums: List[int]) -> int:
         n = len(nums) + 1
         arr_sum = n * (n - 1) // 2
-        num_sum = 0
+        num_sum = sum(nums)
 
-        for number in nums:
-            num_sum += number
-
-        return abs(arr_sum - num_sum)
+        return arr_sum - num_sum
