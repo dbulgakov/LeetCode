@@ -3,21 +3,27 @@ from typing import List
 
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        seen_dict = set()
-        row_count = len(grid)
-        col_count = len(grid[0])
+        seen = set()
+        max_area = 0
 
-        def check_area(row, col):
-            if not (0 <= row < row_count and 0 <= col < col_count
-                    and (row, col) not in seen_dict and grid[row][col] == 1):
+        def dfs(row: int, col: int) -> int:
+            if (row, col) in seen or not (0 <= row < len(grid) and 0 <= col < len(grid[0])) or grid[row][col] != 1:
                 return 0
-            seen_dict.add((row, col))
 
-            return 1 + check_area(row + 1, col) \
-                   + check_area(row - 1, col) \
-                   + check_area(row, col + 1) \
-                   + check_area(row, col - 1)
+            seen.add((row, col))
 
-        return max(check_area(r, c)
-                   for r in range(row_count)
-                   for c in range(col_count))
+            total_area = 1
+
+            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                r = row + dr
+                c = col + dc
+
+                total_area += dfs(r, c)
+
+            return total_area
+
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                max_area = max(max_area, dfs(i, j))
+
+        return max_area
