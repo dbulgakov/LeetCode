@@ -4,23 +4,21 @@ from typing import List
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         seen = set()
-        n_rows = len(grid)
-        n_col = len(grid[0])
-        counter: int = 0
+        counter = 0
 
-        def check_area(row: int, col: int) -> int:
-            if not ((row, col) not in seen and 0 <= row < n_rows and 0 <= col < n_col and grid[row][col] == '1'):
+        def search_island(r: int, c: int) -> int:
+            if (r, c) in seen or not (0 <= r < len(grid) and 0 <= c < len(grid[0])) or grid[r][c] != '1':
                 return 0
 
-            seen.add((row, col))
+            seen.add((r, c))
 
-            for dx, dy in (-1, 0), (1, 0), (0, -1), (0, 1):
-                check_area(row + dx, col + dy)
+            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                search_island(r + dr, c + dc)
 
             return 1
 
-        for i in range(0, n_rows):
-            for j in range(0, n_col):
-                counter += check_area(i, j)
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                counter += search_island(i, j)
 
         return counter
