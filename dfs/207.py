@@ -9,20 +9,20 @@ class Solution:
         for crs, pre in prerequisites:
             preMap[crs].append(pre)
 
-        visiting = set()
+        visited = set()
 
-        def dfs(crs: int):
-            if crs in visiting:
+        def dfs(course: int):
+            if course in visited:
                 return False
-            if not preMap[crs]:
+            if not preMap[course]:
                 return True
 
-            visiting.add(crs)
-            for pre in preMap[crs]:
+            visited.add(course)
+            for pre in preMap[course]:
                 if not dfs(pre):
                     return False
-            visiting.remove(crs)
-            preMap[crs] = []
+            visited.remove(course)
+            preMap[course] = []
             return True
 
         for c in range(numCourses):
