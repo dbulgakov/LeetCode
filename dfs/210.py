@@ -3,13 +3,14 @@ from typing import List
 
 
 class Solution:
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         preMap = defaultdict(list)
 
         for crs, pre in prerequisites:
             preMap[crs].append(pre)
 
         cycle, visit = set(), set()
+        res = []
 
         def dfs(course: int):
             if course in cycle:
@@ -23,9 +24,10 @@ class Solution:
                     return False
             cycle.remove(course)
             visit.add(course)
+            res.append(course)
             return True
 
         for c in range(numCourses):
             if not dfs(c):
-                return False
-        return True
+                return []
+        return res
