@@ -9,7 +9,7 @@ class Solution:
 
         q = [(grid[0][0], 0, 0)]
 
-        seen = set()
+        seen = {0, 0}
 
         while q:
             duration, row, col = heapq.heappop(q)
@@ -22,7 +22,7 @@ class Solution:
                 c = col + dc
 
                 if 0 <= r < len(grid) and 0 <= c < len(grid[0]) and (r, c) not in seen:
-                    new_duration = max(duration, max(grid[0][0], grid[r][c]))
+                    new_duration = max(duration, grid[r][c])
                     seen.add((r, c))
                     heapq.heappush(q, (new_duration, r, c))
 
