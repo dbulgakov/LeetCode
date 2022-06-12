@@ -1,16 +1,8 @@
-import functools
-
-
 class Solution:
     def climbStairs(self, n: int) -> int:
-        @functools.lru_cache(None)
-        def backtracking(start):
-            if start > n:
-                return 0
+        one, two = 1, 1
 
-            if start == n:
-                return 1
+        for i in range(n - 1):
+            one, two = one + two, one
 
-            return backtracking(start + 1) + backtracking(start + 2)
-
-        return backtracking(0) if n > 0 else 0
+        return one
