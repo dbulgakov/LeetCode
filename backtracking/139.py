@@ -1,16 +1,20 @@
-from functools import lru_cache
-from typing import FrozenSet, List
+from functools import cache
+from typing import List
 
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        @lru_cache
-        def wordBreakMemo(s: str, word_dict: FrozenSet[str], start: int):
+        word_set = set(wordDict)
+
+        @cache
+        def word_break(s: str, start: int) -> bool:
             if start == len(s):
                 return True
+
             for end in range(start + 1, len(s) + 1):
-                if s[start:end] in word_dict and wordBreakMemo(s, word_dict, end):
+                if s[start:end] in word_set and word_break(s, end):
                     return True
+
             return False
 
-        return wordBreakMemo(s, frozenset(wordDict), 0)
+        return word_break(s, 0)
