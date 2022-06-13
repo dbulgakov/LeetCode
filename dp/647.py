@@ -1,12 +1,18 @@
-from functools import cache
-
-
 class Solution:
     def countSubstrings(self, s: str) -> int:
-        @cache
-        def is_palindrome(i, j):
-            if i >= j:
-                return True
-            return s[i] == s[j] and is_palindrome(i + 1, j - 1)
+        res = 0
 
-        return sum(is_palindrome(i, j) for i in range(len(s)) for j in range(i, len(s)))
+        def expand(l: int, r: int) -> int:
+            counter = 0
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                counter += 1
+                l -= 1
+                r += 1
+
+            return counter
+
+        for i in range(len(s)):
+            res += expand(i, i)
+            res += expand(i, i + 1)
+
+        return res
