@@ -1,17 +1,12 @@
-import functools
-
-
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
-        @functools.cache
-        def check_subsequence(first_pointer: int, second_pointer: int) -> int:
-            if first_pointer == len(text1) or second_pointer == len(text2):
-                return 0
+        dp = [[0] * (len(text2) + 1) for _ in range(len(text1) + 1)]
 
-            if text1[first_pointer] == text2[second_pointer]:
-                return 1 + check_subsequence(first_pointer + 1, second_pointer + 1)
-            else:
-                return max(check_subsequence(first_pointer + 1, second_pointer),
-                           check_subsequence(first_pointer, second_pointer + 1))
+        for i in range(len(text1) - 1, -1, -1):
+            for j in range(len(text2) - 1, -1, -1):
+                if text1[i] == text2[j]:
+                    dp[i][j] = 1 + dp[i + 1][j + 1]
+                else:
+                    dp[i][j] = max(dp[i][j + 1], dp[i + 1][j])
 
-        return check_subsequence(0, 0)
+        return dp[0][0]
