@@ -1,4 +1,7 @@
 class Solution:
+    # Time: O(n)
+    # Space: O(1)
+
     def maxSubArray(self, nums: list[int]) -> int:
         current_subarray = max_subarray = nums[0]
 
