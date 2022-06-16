@@ -2,6 +2,9 @@ from typing import List
 
 
 class Solution:
+    # Time: O(n)
+    # Space: O(1)
+
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
         if sum(cost) > sum(gas):
             return -1
