@@ -14,7 +14,7 @@ class Solution:
         end = intervals[0][1]
 
         for i in range(0, len(intervals)):
-            if intervals[i][0] >= start and intervals[i][0] <= end:
+            if start <= intervals[i][0] <= end:
                 start = min(start, intervals[i][0])
                 end = max(end, intervals[i][1])
             else:
