@@ -1,16 +1,25 @@
+from collections import deque
+
+
 class Solution:
     def isHappy(self, n: int) -> bool:
-
-        def get_next(n):
-            total_sum = 0
-            while n > 0:
-                n, digit = divmod(n, 10)
-                total_sum += digit ** 2
-            return total_sum
-
+        q = deque([n])
         seen = set()
-        while n != 1 and n not in seen:
-            seen.add(n)
-            n = get_next(n)
 
-        return n == 1
+        while q:
+            number = q.popleft()
+
+            if number in seen:
+                return False
+
+            res = 0
+            for c in str(number):
+                res += int(c) ** 2
+
+            if res == 1:
+                return True
+
+            seen.add(number)
+            q.append(res)
+
+        return False
